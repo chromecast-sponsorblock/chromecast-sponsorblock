@@ -1,0 +1,28 @@
+{
+  "name": "chromecast-sponsorblock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build-windows; npm run build-linux; npm run build-macos; npm run build-alpine",
+    "build-windows": "nexe --build -t windows -i index.js -o dist/chromecast-sponsorblock.exe",
+    "build-linux": "nexe --build -t linux index.js -o dist/chromecast-sponsorblock-linux",
+    "build-macos": "nexe --build -t macos index.js -o dist/chromecast-sponsorblock-macos",
+    "build-alpine": "nexe --build -t alpine index.js -o dist/chromecast-sponsorblock-alpine"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/**/*"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chromecast-api": "^0.3.4",
+    "got": "^11.7.0",
+    "js-lru": "^1.0.0",
+    "lru_map": "^0.4.0",
+    "nexe": "^3.3.7"
+  }
+}
