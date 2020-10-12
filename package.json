@@ -1,19 +1,24 @@
 {
   "name": "chromecast-sponsorblock",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "bin": {
+    "chromecast-sponsorblock": "bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build-windows; npm run build-linux; npm run build-macos; npm run build-alpine",
-    "build-windows": "nexe --build -t windows -i index.js -o dist/chromecast-sponsorblock.exe",
-    "build-linux": "nexe --build -t linux index.js -o dist/chromecast-sponsorblock-linux",
-    "build-macos": "nexe --build -t macos index.js -o dist/chromecast-sponsorblock-macos",
-    "build-alpine": "nexe --build -t alpine index.js -o dist/chromecast-sponsorblock-alpine"
+    "build": "npm run build-windows-x86; npm run build-windows-x64; npm run build-linux-x64; npm run build-linux-armv7; npm run build-macos-x64; npm run build-alpine-x64",
+    "build-windows-x86": "pkg package.json -t node12.2.0-windows-x86 --no-bytecode --output dist/windows-x86/chromecast-sponsorblock.exe",
+    "build-windows-x64": "pkg package.json -t node12.2.0-windows-x64 --no-bytecode --output  dist/windows-x64/chromecast-sponsorblock.exe",
+    "build-linux-x64": "pkg package.json -t node12.2.0-linux-x64 --no-bytecode --output  dist/linux-x64/chromecast-sponsorblock",
+    "build-linux-armv7": "pkg package.json -t node12.2.0-linux-armv7 --no-bytecode --output  dist/linux-armv7/chromecast-sponsorblock",
+    "build-macos-x64": "pkg package.json -t node12.2.0-macos-x64 --no-bytecode --output  dist/macos-x64/chromecast-sponsorblock",
+    "build-alpine-x64": "pkg package.json -t node12.2.0-alpine-x64 --no-bytecode --output  dist/alpine-x64/chromecast-sponsorblock"
   },
   "pkg": {
     "assets": [
-      "node_modules/**/*"
+      "node_modules/castv2/lib/cast_channel.proto",
+      "node_modules/castv2/lib/cast_channel.desc"
     ]
   },
   "author": "",
@@ -22,7 +27,18 @@
     "chromecast-api": "^0.3.4",
     "got": "^11.7.0",
     "js-lru": "^1.0.0",
+    "longjohn": "^0.2.12",
     "lru_map": "^0.4.0",
-    "nexe": "^3.3.7"
-  }
+    "nexe": "^4.0.0-beta.14"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chromecast-sponsorblock/chromecast-sponsorblock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chromecast-sponsorblock/chromecast-sponsorblock/issues"
+  },
+  "homepage": "https://github.com/chromecast-sponsorblock/chromecast-sponsorblock#readme",
+  "description": ""
 }
