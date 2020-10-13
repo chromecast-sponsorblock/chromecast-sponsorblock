@@ -27,16 +27,10 @@
   "dependencies": {
     "chromecast-api": "^0.3.4",
     "got": "^11.7.0",
-    "js-lru": "^1.0.0",
     "lru_map": "^0.4.0",
     "meow": "^7.1.1",
     "pkg": "^4.4.9",
     "ytdl-core": "^3.3.0"
-  },
-  "devDependencies": {
-    "electron-builder": "^22.9.1",
-    "electron-global": "0.0.2",
-    "electron-packager": "^15.1.0"
   },
   "repository": {
     "type": "git",
