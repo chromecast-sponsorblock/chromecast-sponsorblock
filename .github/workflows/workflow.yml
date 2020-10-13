@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -12,25 +11,24 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build-windows-x86
-    - run: npm run build-windows-x64
-    - run: npm run build-linux-x64
-    - run: npm run build-linux-armv7
-    - run: npm run build-macos-x64
-    - run: npm run build-alpine-x64
-    - name: Commit and push if it changed
-      run: |-
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        git add -A
-        timestamp=$(date -u)
-        git commit -m "Latest build: ${timestamp}" || exit 0
-        git push
-      env:
-        CI: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build-windows-x64
+      - run: npm run build-linux-x64
+      - run: npm run build-linux-armv7
+      - run: npm run build-macos-x64
+      - run: npm run build-alpine-x64
+      - name: Commit and push if it changed
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest build: ${timestamp}" || exit 0
+          git push
+        env:
+          CI: true

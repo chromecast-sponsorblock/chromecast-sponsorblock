@@ -1,0 +1,13 @@
+{
+  "categories": [
+    "sponsor",
+    "intro",
+    "outro",
+    "interaction",
+    "selfpromo",
+    "music_offtopic"
+  ],
+  "chromecastFriendlyNames": ["Vrak.tv"],
+  "channelOverride": {},
+  "videoOverride": {}
+}
