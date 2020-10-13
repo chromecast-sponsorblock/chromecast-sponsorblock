@@ -12,7 +12,12 @@ uniqueTimeouts.shift = function () {
   return entry;
 };
 
-module.exports = function setUniqueTimeout(key, callback, ms_function, override = false) {
+module.exports = function setUniqueTimeout(
+  key,
+  callback,
+  ms_function,
+  override = false
+) {
   if (uniqueTimeouts.has(key)) {
     if (!override) {
       return;
@@ -20,4 +25,4 @@ module.exports = function setUniqueTimeout(key, callback, ms_function, override 
     clearTimeout(uniqueTimeouts.get(key));
   }
   uniqueTimeouts.set(key, setTimeout(callback, ms_function()));
-}
+};

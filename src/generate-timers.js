@@ -3,14 +3,14 @@ const setUniqueTimeout = require("./utils/unique-timeout");
 let preventConflictSeek = false;
 
 // consider out of segment before the end to prevent seeking twice;
-const END_BUFFER = .1;
+const END_BUFFER = 0.1;
 
 module.exports = function generateTimers(
   contentId,
   segments,
-  currentTime,
+  currentTimeByDevice,
   device,
-  floatingAverageLatency
+  latencyByDevice
 ) {
   try {
     let i = 0;
@@ -18,16 +18,15 @@ module.exports = function generateTimers(
       const segment = segments[i];
       const position = getPosition(segment);
       // we are after segment
-      if (position === 'after') {
+      if (position === "after") {
         continue;
-      }
-      else if (position === 'in'){
+      } else if (position === "in") {
         seekToOnce();
         continue;
-      }
-      else if (position === 'before') {
+      } else if (position === "before") {
         const timeout =
-          (segment[0] - currentTime) * 1000 - floatingAverageLatency * 2;
+          (segment[0] - currentTimeByDevice.get(device.host)) * 1000 -
+          latencyByDevice.get(device.host) * 2;
         setUniqueTimeout(
           contentId + "_SEG_" + i,
           () => {
@@ -39,18 +38,14 @@ module.exports = function generateTimers(
       }
 
       function seekToOnce() {
-        console.log('TRYING TO FORCE SEEK')
         if (preventConflictSeek) {
           return;
         }
         const position = getPosition(segment);
-        console.log(position);
-        console.log(segment);
-        if (position === 'after') {
-            return;
+        if (position === "after") {
+          return;
         }
         preventConflictSeek = true;
-        console.log('FORCE SEEK NOW !!!')
         device.seekTo(segment[1]);
         setTimeout(() => {
           preventConflictSeek = false;
@@ -61,17 +56,16 @@ module.exports = function generateTimers(
     console.error(err);
   }
 
-  function getPosition (seg) {
-      const begin = seg[0];
-      const end = seg[1] - END_BUFFER;
-    if (end < currentTime) {
-        return 'after';
-      }
-      else if (begin < currentTime && currentTime < end) {
-        return 'in';
-      }
-      else {
-        return 'before';
+  function getPosition(seg) {
+    const begin = seg[0];
+    const end = seg[1] - END_BUFFER;
+    const now = currentTimeByDevice.get(device.host);
+    if (end < now) {
+      return "after";
+    } else if (begin < now && now < end) {
+      return "in";
+    } else {
+      return "before";
     }
   }
 };

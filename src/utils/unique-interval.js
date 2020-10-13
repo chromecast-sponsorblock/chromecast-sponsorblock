@@ -19,9 +19,12 @@ module.exports = function setUniqueInterval(key, callback, ms_function) {
   loop();
   function loop() {
     clearTimeout(uniqueIntervals.get(key));
-    uniqueIntervals.set(key, setTimeout(() => {
-        loop()
-    }, ms_function()));
+    uniqueIntervals.set(
+      key,
+      setTimeout(() => {
+        loop();
+      }, ms_function())
+    );
     callback();
   }
-}
+};
