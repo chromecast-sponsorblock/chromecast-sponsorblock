@@ -17,18 +17,67 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run build-windows-x64
-      - run: npm run build-linux-x64
-      - run: npm run build-linux-armv7
-      - run: npm run build-macos-x64
-      - run: npm run build-alpine-x64
-      - name: Commit and push if it changed
-        run: |-
-          git config user.name "Automated"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A
-          timestamp=$(date -u)
-          git commit -m "Latest build: ${timestamp}" || exit 0
-          git push
+      - run: npm run build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          CI: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Alpine
+        id: upload_alpine
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/chromecast-sponsorblock-alpine-x64
+          asset_name: chromecast-sponsorblock-alpine-x64
+          asset_content_type: application/octet-stream
+      - name: Upload Linux Armv7
+        id: upload_linux_armv7
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/chromecast-sponsorblock-linux-armv7
+          asset_name: chromecast-sponsorblock-linux-armv7
+          asset_content_type: application/octet-stream
+      - name: Upload Linux x64
+        id: upload_linux_x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/chromecast-sponsorblock-linux-x64
+          asset_name: chromecast-sponsorblock-linux-x64
+          asset_content_type: application/octet-stream
+      - name: Upload MacOS x64
+        id: upload_macos_x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/chromecast-sponsorblock-macos-x64
+          asset_name: chromecast-sponsorblock-macos-x64
+          asset_content_type: application/octet-stream
+      - name: Upload MacOS x64
+        id: upload_macos_x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/chromecast-sponsorblock-win-x64.exe
+          asset_name: chromecast-sponsorblock-win-x64.exe
+          asset_content_type: application/x-ms-dos-executable
+
+
+          

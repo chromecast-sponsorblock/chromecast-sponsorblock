@@ -40,11 +40,16 @@ module.exports = async function getSegments(contentId) {
     };
 
     // merge overlapping segments
-    videoData.segments = stupidMerge(videoData.segments).map((x) => Object.assign({}, x.segment, x));
+    videoData.segments = stupidMerge(videoData.segments).map((x) =>
+      Object.assign({}, x.segment, x)
+    );
   } catch (err) {
-    console.error(err);
+    if (config.flags.debug) {
+      console.error(err);
+    }
+    videoData = { segments: [] };
   }
-  const result = videoData.segments || [];
+  const result = videoData && videoData.segments ? videoData.segments : [];
   segmentsByContentId.set(contentId, result);
   return result;
 };
