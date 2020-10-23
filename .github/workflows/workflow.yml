@@ -68,8 +68,8 @@ jobs:
           asset_path: ./dist/chromecast-sponsorblock-macos-x64
           asset_name: chromecast-sponsorblock-macos-x64
           asset_content_type: application/octet-stream
-      - name: Upload MacOS x64
-        id: upload_macos_x64
+      - name: Upload Windows x64
+        id: upload_win_x64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
