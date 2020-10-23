@@ -7,7 +7,9 @@ uniqueIntervals.shift = function () {
   try {
     clearTimeout(entry);
   } catch (err) {
-    console.error(err);
+    if (config.flags.debug) {
+      console.error(err);
+    }
   }
   return entry;
 };

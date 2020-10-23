@@ -26,9 +26,9 @@ module.exports = function generateTimers(
       } else if (position === "before") {
         const timeout =
           (segment[0] - currentTimeByDevice.get(device.host)) * 1000 -
-          latencyByDevice.get(device.host) * 2;
+          Number((latencyByDevice.get(device.host) * 2n) / 1000000n);
         setUniqueTimeout(
-          contentId + "_SEG_" + i,
+          device.host + "_" + contentId + "_SEG_" + i,
           () => {
             seekToOnce();
           },
@@ -53,7 +53,9 @@ module.exports = function generateTimers(
       }
     }
   } catch (err) {
-    console.error(err);
+    if (config.flags.debug) {
+      console.error(err);
+    }
   }
 
   function getPosition(seg) {

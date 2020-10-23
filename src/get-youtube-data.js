@@ -1,8 +1,8 @@
-const ytdl = require("ytdl-core");
+"use strict";
 
-const got = require("got");
+const ytdl = require("ytdl-core");
 const { LRUMap } = require("lru_map");
-const { config } = require("process");
+const config = require("./load-config")();
 const wait = require("./utils/wait");
 
 const requestStarted = new LRUMap(128);
@@ -34,8 +34,34 @@ module.exports = async function getYoutubeData(contentId) {
 };
 
 async function getData(contentId) {
-  const raw = await ytdl.getBasicInfo(
-    "https://www.youtube.com/watch?v=" + contentId
-  );
+  let raw;
+  try {
+    raw = await ytdl.getBasicInfo(
+      "https://www.youtube.com/watch?v=" + contentId
+    );
+  } catch (err) {
+    await wait(200);
+    try {
+      raw = await ytdl.getBasicInfo(
+        "https://www.youtube.com/watch?v=" + contentId
+      );
+    } catch (err) {
+      await wait(200);
+      try {
+        raw = await ytdl.getBasicInfo(
+          "https://www.youtube.com/watch?v=" + contentId
+        );
+      } catch (err) {
+        if (config.flags.debug) {
+          console.error(err);
+        }
+        return {
+          id: "Error loading data",
+          name: "Error loading data",
+        };
+      }
+    }
+  }
+
   return { id: raw.videoDetails.author.id, name: raw.videoDetails.author.name };
 }
