@@ -45,9 +45,9 @@ const cli = meow(
 if (cli.flags.interactive) {
   console.clear();
 }
-console.log("Chromecast Sponsorblock v0.1 by Simon Lévesque");
 const config = require("./load-config")(cli.flags);
 if (cli.flags.interactive) {
+  console.log("Chromecast Sponsorblock v0.1 by Simon Lévesque");
   console.log('Waiting for chromecasts...');
 }
 
@@ -134,17 +134,21 @@ setUniqueInterval(
           ) {
             blocked = true;
             statusByDevice.set(device.host, blockedStatus);
-            generateLogData();
-            if (!config.flags.interactive) {
-              throw new Error("Chromecast blocked");
-            } else {
-              return;
+            if (config.flags.interactive) {
+              generateLogData();
             }
+            else {
+              throw new Error("Chromecast blocked");
+            }
+            // if blocked, process next device
+            continue;
           }
 
           setUniqueInterval(
             "PING_DEVICE_" + device.host,
             async () => {
+              console.log(
+                "PING_DEVICE_" + device.host)
               try {
                 const status = await getStatusAndLatency(
                   device,
@@ -207,31 +211,31 @@ setUniqueInterval(
           const youtubeData = youtubeDataByDevice.get(device.host);
           const segments = segmentsByDevice.get(device.host);
           logInteractive(
-            `* (${idByDevice.get(device.host)}) ${device.friendlyName}
-* Name:                  ${device.name}
-* Host:                  ${device.host}
-* Blocked:               ${blocked}
-* Curent latency:        ${
+            `- (${idByDevice.get(device.host)}) ${device.friendlyName}
+  Name:                  ${device.name}
+  Host:                  ${device.host}
+  Blocked:               ${blocked}
+  Curent latency:        ${
               latency
                 ? `${latency} nanoseconds (${Number(latency / 1000000n)} ms)${
                     latency === 50000000n ? " (initial value)" : ""
                   }`
                 : `unavailable`
             }
-* Curent ping frequency: ${
+  Curent ping frequency: ${
               latency
                 ? `${PING_DEVICE_TIMING_FUNCTION()} ms (${PING_DEVICE_TIMING_MULTIPLIFIER} times the latency)`
                 : `unavailable`
             }
-* Player state:          ${status.playerState}
-* Current video:         ${status.media.metadata.title} (${
+  Player state:          ${status.playerState}
+  Current video:         ${status.media.metadata.title} (${
               status.media.contentId
             })
-* Current channel:       ${
+  Current channel:       ${
               youtubeData && youtubeData.name ? youtubeData.name : "N/A"
             } (${youtubeData && youtubeData.id ? youtubeData.id : "N/A"})
-* Current time:          ${status.currentTime} / ${status.media.duration}
-* Segments: ${
+  Current time:          ${status.currentTime} / ${status.media.duration}
+  Segments: ${
               !segments
                 ? "Waiting for data"
                 : segments.length === 0
@@ -277,6 +281,9 @@ setUniqueInterval(
 function logInteractive(log, devices, host) {
   logByDevice.set(host, log);
   console.clear();
+  console.log("Chromecast Sponsorblock v0.1 by Simon Lévesque");
+  console.log("Look for device interval: " + LOOK_FOR_DEVICES_TIMING_FUNCTION());
+  console.log("Devices:")
   for (let device of devices) {
     console.log(logByDevice.get(device.host));
   }
