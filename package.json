@@ -1,9 +1,9 @@
 {
-  "name": "chromecast-sponsorblock",
+  "name": "cast-sponsorblock",
   "version": "0.1.0",
   "main": "index.js",
   "bin": {
-    "chromecast-sponsorblock": "bin/index.js"
+    "cast-sponsorblock": "bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +20,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chromecast-api": "^0.3.4",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/hapi": "^20.0.1",
+    "chromecast-api": "file://./src/forks/chromecast-api",
+    "debug": "^4.2.0",
     "got": "^11.8.0",
     "lru_map": "^0.4.1",
     "meow": "^7.1.1",
@@ -29,11 +32,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chromecast-sponsorblock/chromecast-sponsorblock.git"
+    "url": "git+https://github.com/cast-sponsorblock/cast-sponsorblock.git"
   },
   "bugs": {
-    "url": "https://github.com/chromecast-sponsorblock/chromecast-sponsorblock/issues"
+    "url": "https://github.com/cast-sponsorblock/cast-sponsorblock/issues"
   },
-  "homepage": "https://github.com/chromecast-sponsorblock/chromecast-sponsorblock#readme",
+  "homepage": "https://github.com/cast-sponsorblock/cast-sponsorblock#readme",
   "description": ""
 }

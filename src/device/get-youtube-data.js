@@ -2,11 +2,8 @@
 
 const ytdl = require("ytdl-core");
 const { LRUMap } = require("lru_map");
-const config = require("./load-config")();
+const config = require("./config")();
 const wait = require("./utils/wait");
-
-const requestStarted = new LRUMap(128);
-const youtubeDataByContentId = new LRUMap(128);
 
 module.exports = async function getYoutubeData(contentId) {
   if (!contentId) {

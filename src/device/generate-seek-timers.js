@@ -1,4 +1,4 @@
-const setUniqueTimeout = require("./utils/unique-timeout");
+const setUniqueTimeout = require("../utils/unique-timeout");
 
 let preventConflictSeek = false;
 

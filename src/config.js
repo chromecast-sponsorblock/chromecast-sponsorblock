@@ -2,7 +2,7 @@ const path = require("path");
 const process = require("process");
 const fs = require("fs");
 
-const defaultConfig = require("../chromecast-sponsorblock.default.json");
+const defaultConfig = require("../cast-sponsorblock.default.json");
 
 let config;
 

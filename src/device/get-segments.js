@@ -1,10 +1,9 @@
 const got = require("got");
 const { LRUMap } = require("lru_map");
 const wait = require("./utils/wait");
-const config = require("./load-config")();
+const config = require("./config")();
 
-const requestStarted = new LRUMap(128);
-const segmentsByContentId = new LRUMap(128);
+
 module.exports = async function getSegments(contentId) {
   let videoData = null;
   try {
@@ -45,7 +44,7 @@ module.exports = async function getSegments(contentId) {
     );
   } catch (err) {
     if (config.flags.debug) {
-      console.error(err);
+      //console.error(err);
     }
     videoData = { segments: [] };
   }
