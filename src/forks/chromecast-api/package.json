@@ -1,0 +1,70 @@
+{
+  "_from": "chromecast-api@^0.3.4",
+  "_id": "chromecast-api@0.3.4",
+  "_inBundle": false,
+  "_integrity": "sha512-b7+qyms+78cRMUiygPW/x8E5SL3gFRycmZDO5JWKYp0NS3wY4S620j0Xo6oQumQFMKUEvnVlEIPqPcDwzlam3A==",
+  "_location": "/chromecast-api",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "chromecast-api@^0.3.4",
+    "name": "chromecast-api",
+    "escapedName": "chromecast-api",
+    "rawSpec": "^0.3.4",
+    "saveSpec": null,
+    "fetchSpec": "^0.3.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/chromecast-api/-/chromecast-api-0.3.4.tgz",
+  "_shasum": "7c4a30f29dc8a76aa725da893c926dcfb616d647",
+  "_spec": "chromecast-api@^0.3.4",
+  "_where": "/home/deagle/web/cast-sponsorblock",
+  "author": {
+    "name": "Alex",
+    "email": "alxmorais8@msn.com"
+  },
+  "bugs": {
+    "url": "https://github.com/alxhotel/chromecast-api/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "castv2-client": "1.2.0",
+    "debug": "^4.1.1",
+    "dns-txt": "^2.0.2",
+    "mime": "^2.3.1",
+    "multicast-dns": "^7.2.0",
+    "node-ssdp": "^4.0.0",
+    "xml2js": "^0.4.23",
+    "youtube-remote": "^1.0.0"
+  },
+  "deprecated": false,
+  "description": "Chromecast streaming module all in JS",
+  "devDependencies": {
+    "standard": "latest"
+  },
+  "homepage": "https://github.com/alxhotel/chromecast-api",
+  "keywords": [
+    "chromecast",
+    "googlecast",
+    "cast",
+    "media",
+    "device",
+    "stream",
+    "streaming",
+    "torrent"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "chromecast-api",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxhotel/chromecast-api.git"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "version": "0.3.4"
+}

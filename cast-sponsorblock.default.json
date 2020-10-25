@@ -7,7 +7,11 @@
     "selfpromo",
     "music_offtopic"
   ],
-  "chromecastFriendlyNames": ["Vrak.tv"],
+  "chromecastFriendlyNames": [],
   "channelOverride": {},
-  "videoOverride": {}
+  "videoOverride": {},
+  "intervals": {
+    "minimumPing": 20,
+    "lookForDevices": 2500
+  }
 }
