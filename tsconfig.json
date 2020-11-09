@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": false,
+		"strictNullChecks": false,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"noImplicitAny": false,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"rootDirs": ["src", "stories"],
+		"declaration": true,
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"types": ["node", "webpack-env"],
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules"]
+}

@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const meow = require("meow");
+const meow = require('meow');
 
 const cli = meow(
-  `
+	`
       Usage
         $ cast-sponsorblock
    
@@ -18,20 +18,20 @@ const cli = meow(
         $ cast-sponsorblock -c ~/.config/cast-sponsorblock.json
         $ cast-sponsorblock -d
   `,
-  {
-    flags: {
-      config: {
-        type: "string",
-        alias: "c",
-      },
-      debug: {
-        type: "boolean",
-        alias: "d",
-      },
-    },
-  }
+	{
+		flags: {
+			config: {
+				type: 'string',
+				alias: 'c'
+			},
+			debug: {
+				type: 'boolean',
+				alias: 'd'
+			}
+		}
+	}
 );
 
-require("../config")(cli.flags);
+require('../config')(cli.flags);
 
-console.log("Chromecast Sponsorblock v0.1 by Simon Lévesque");
+console.log('Chromecast Sponsorblock v0.1 by Simon Lévesque');

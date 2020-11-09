@@ -1,17 +1,21 @@
 {
-  "categories": [
-    "sponsor",
-    "intro",
-    "outro",
-    "interaction",
-    "selfpromo",
-    "music_offtopic"
-  ],
-  "chromecastFriendlyNames": [],
-  "channelOverride": {},
-  "videoOverride": {},
-  "intervals": {
-    "minimumPing": 20,
-    "lookForDevices": 2500
-  }
+	"categories": [
+		"sponsor",
+		"intro",
+		"outro",
+		"interaction",
+		"selfpromo",
+		"music_offtopic"
+	],
+	"chromecastFriendlyNames": [],
+	"channelOverride": {},
+	"videoOverride": {},
+	"averageLatencyWindow": 256,
+	"multipliers": {
+		"pingDeviceEveryXTimesLatency": 8
+	},
+	"intervals": {
+		"minimumPingDevice": 50,
+		"lookForDevices": 2500
+	}
 }

@@ -1,42 +1,49 @@
 {
-  "name": "cast-sponsorblock",
-  "version": "0.1.0",
-  "main": "index.js",
-  "bin": {
-    "cast-sponsorblock": "bin/index.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --no-warnings --no-deprecation bin/index.js",
-    "build": "pkg package.json --out-path dist -t node12.2.0-win-x64,node12.2.0-linux-x64,node12.2.0-linux-armv7,node12.2.0-macos-x64,node12.2.0-alpine-x64 --no-bytecode  --options no-deprecation,no-warnings"
-  },
-  "pkg": {
-    "assets": [
-      "node_modules/castv2/lib/cast_channel.proto",
-      "node_modules/castv2/lib/cast_channel.desc",
-      "node_modules/uid2/index.js"
-    ]
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@hapi/boom": "^9.1.0",
-    "@hapi/hapi": "^20.0.1",
-    "chromecast-api": "file://./src/forks/chromecast-api",
-    "debug": "^4.2.0",
-    "got": "^11.8.0",
-    "lru_map": "^0.4.1",
-    "meow": "^7.1.1",
-    "pkg": "^4.4.9",
-    "ytdl-core": "^3.4.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cast-sponsorblock/cast-sponsorblock.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cast-sponsorblock/cast-sponsorblock/issues"
-  },
-  "homepage": "https://github.com/cast-sponsorblock/cast-sponsorblock#readme",
-  "description": ""
+	"name": "cast-sponsorblock",
+	"version": "0.1.0",
+	"main": "index.js",
+	"bin": {
+		"cast-sponsorblock": "bin/index.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint . --fix; prettier . --write",
+		"start": "node --no-warnings --no-deprecation bin/index.js",
+		"build": "pkg package.json --out-path dist -t node12.2.0-win-x64,node12.2.0-linux-x64,node12.2.0-linux-armv7,node12.2.0-macos-x64,node12.2.0-alpine-x64 --no-bytecode  --options no-deprecation,no-warnings"
+	},
+	"pkg": {
+		"assets": [
+			"node_modules/castv2/lib/cast_channel.proto",
+			"node_modules/castv2/lib/cast_channel.desc",
+			"node_modules/uid2/index.js"
+		]
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@hapi/boom": "^9.1.0",
+		"@hapi/hapi": "^20.0.1",
+		"chromecast-api": "file://./src/forks/chromecast-api",
+		"debug": "^4.2.0",
+		"got": "^11.8.0",
+		"jstoxml": "^2.0.1",
+		"lru_map": "^0.4.1",
+		"meow": "^7.1.1",
+		"pkg": "^4.4.9",
+		"ytdl-core": "^3.4.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cast-sponsorblock/cast-sponsorblock.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cast-sponsorblock/cast-sponsorblock/issues"
+	},
+	"homepage": "https://github.com/cast-sponsorblock/cast-sponsorblock#readme",
+	"description": "",
+	"devDependencies": {
+		"eslint": "^7.12.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"prettier": "^2.1.2"
+	}
 }
