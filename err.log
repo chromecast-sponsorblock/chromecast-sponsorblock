@@ -1,0 +1,15 @@
+Error: No sockets available, cannot start.
+    at SsdpClient.SSDP._createSockets (/home/deagle/web/cast-sponsorblock/node_modules/node-ssdp/lib/index.js:186:11)
+    at SsdpClient.SSDP._start (/home/deagle/web/cast-sponsorblock/node_modules/node-ssdp/lib/index.js:229:10)
+    at /home/deagle/web/cast-sponsorblock/node_modules/node-ssdp/lib/client.js:60:10
+    at Promise._execute (/home/deagle/web/cast-sponsorblock/node_modules/bluebird/js/release/debuggability.js:384:9)
+    at Promise._resolveFromExecutor (/home/deagle/web/cast-sponsorblock/node_modules/bluebird/js/release/promise.js:518:18)
+    at new Promise (/home/deagle/web/cast-sponsorblock/node_modules/bluebird/js/release/promise.js:103:10)
+    at SsdpClient.start (/home/deagle/web/cast-sponsorblock/node_modules/node-ssdp/lib/client.js:54:10)
+    at SsdpClient.search (/home/deagle/web/cast-sponsorblock/node_modules/node-ssdp/lib/client.js:82:17)
+    at Client._triggerSSDP (/home/deagle/web/cast-sponsorblock/src/forks/chromecast-api/lib/client.js:164:32)
+    at Client.querySSDP (/home/deagle/web/cast-sponsorblock/src/forks/chromecast-api/lib/client.js:160:10)
+    at new Client (/home/deagle/web/cast-sponsorblock/src/forks/chromecast-api/lib/client.js:28:10)
+    at Engine.getClient (/home/deagle/web/cast-sponsorblock/src/engine.js:38:18)
+    at loopBody (/home/deagle/web/cast-sponsorblock/src/engine.js:22:10)
+    at Engine.start (/home/deagle/web/cast-sponsorblock/src/engine.js:33:3)

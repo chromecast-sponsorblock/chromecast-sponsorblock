@@ -1,12 +1,17 @@
-"use strict";
+'use strict';
+
+require('./init');
+const config = require('./config');
 
 const Engine = require('./engine');
-
-console.log(11)
-require('./init');
-console.log(22)
 const engine = new Engine();
-console.log(engine)
+try {
+	engine.start();
+} catch (err) {
+	if (config.flags.debug) {
+		console.error(err);
+	}
+}
 /*
 const {
   idDb,
@@ -49,6 +54,4 @@ const blockedStatus = {
 
 */
 
-
 // init client
-

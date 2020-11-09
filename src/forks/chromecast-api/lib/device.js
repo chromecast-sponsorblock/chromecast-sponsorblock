@@ -32,8 +32,8 @@ class Device extends EventEmitter {
 
   _connect (callback) {
     // Use a fresh client
-    // TODO: reconsider reusing the client
-    if (this.client) callback();//this.client.close()
+	// TODO: reconsider reusing the client
+    if (this.client) return callback();
 
     this.client = new Client()
 

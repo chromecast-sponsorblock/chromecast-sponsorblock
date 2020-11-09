@@ -7,6 +7,8 @@ const txt = require('dns-txt')()
 const debug = require('debug')('chromecast-api')
 const Device = require('./device')
 
+const { toXML } = require('jstoxml');
+
 /**
 * Chromecast client
 */
@@ -54,6 +56,8 @@ class Client extends EventEmitter {
     this._mdns.on('response', (response) => {
       const onEachAnswer = (a) => {
         let name
+
+		console.log(a)
 
         if (a.type === 'PTR' && a.name === '_googlecast._tcp.local') {
           debug('DNS [PTR]: ', a)
@@ -115,7 +119,7 @@ class Client extends EventEmitter {
     // SSDP
     this._ssdp = new Ssdp()
     this._ssdp.on('response', (headers, statusCode, rinfo) => {
-      if (statusCode !== 200 || !headers.LOCATION) return
+	  if (statusCode !== 200 || !headers.LOCATION) return
 
       http.get(headers.LOCATION, (res) => {
         let body = ''
@@ -124,13 +128,13 @@ class Client extends EventEmitter {
         })
         res.on('end', () => {
           parseString(body.toString(), { explicitArray: false, explicitRoot: false }, (err, result) => {
-            if (err) return
+			if (err) return
             if (!result.device || !result.device.manufacturer || !result.device.friendlyName ||
-              result.device.manufacturer.indexOf('Google') === -1) return
+              (result.device.manufacturer.indexOf('Google') === -1 && result.device.manufacturer.indexOf('Roku') === -1)) return
 
             // Friendly name
             const matchUDN = body.match(/<UDN>(.+?)<\/UDN>/)
-            const matchFriendlyName = body.match(/<friendlyName>(.+?)<\/friendlyName>/)
+			const matchFriendlyName = body.match(/<friendlyName>(.+?)<\/friendlyName>/)
 
             if (!matchUDN || matchUDN.length !== 2) return
             if (!matchFriendlyName || matchFriendlyName.length !== 2) return
@@ -161,7 +165,10 @@ class Client extends EventEmitter {
   }
 
   _triggerSSDP () {
-    if (this._ssdp) this._ssdp.search('urn:dial-multiscreen-org:service:dial:1')
+    if (this._ssdp) {
+		this._ssdp.search('urn:dial-multiscreen-org:service:dial:1')
+		this._ssdp.search('roku:ecp')
+	}
   }
 
   update () {

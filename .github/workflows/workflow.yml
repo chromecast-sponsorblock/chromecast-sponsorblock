@@ -1,79 +1,76 @@
 name: Node.js CI
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run build
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Alpine
-        id: upload_alpine
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cast-sponsorblock-alpine-x64
-          asset_name: cast-sponsorblock-alpine-x64
-          asset_content_type: application/octet-stream
-      - name: Upload Linux Armv7
-        id: upload_linux_armv7
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cast-sponsorblock-linux-armv7
-          asset_name: cast-sponsorblock-linux-armv7
-          asset_content_type: application/octet-stream
-      - name: Upload Linux x64
-        id: upload_linux_x64
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cast-sponsorblock-linux-x64
-          asset_name: cast-sponsorblock-linux-x64
-          asset_content_type: application/octet-stream
-      - name: Upload MacOS x64
-        id: upload_macos_x64
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cast-sponsorblock-macos-x64
-          asset_name: cast-sponsorblock-macos-x64
-          asset_content_type: application/octet-stream
-      - name: Upload Windows x64
-        id: upload_win_x64
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/cast-sponsorblock-win-x64.exe
-          asset_name: cast-sponsorblock-win-x64.exe
-          asset_content_type: application/x-ms-dos-executable
-
-
-          
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [12.x]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - run: npm install
+            - run: npm run build
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+                  draft: false
+                  prerelease: false
+            - name: Upload Alpine
+              id: upload_alpine
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/cast-sponsorblock-alpine-x64
+                  asset_name: cast-sponsorblock-alpine-x64
+                  asset_content_type: application/octet-stream
+            - name: Upload Linux Armv7
+              id: upload_linux_armv7
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/cast-sponsorblock-linux-armv7
+                  asset_name: cast-sponsorblock-linux-armv7
+                  asset_content_type: application/octet-stream
+            - name: Upload Linux x64
+              id: upload_linux_x64
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/cast-sponsorblock-linux-x64
+                  asset_name: cast-sponsorblock-linux-x64
+                  asset_content_type: application/octet-stream
+            - name: Upload MacOS x64
+              id: upload_macos_x64
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/cast-sponsorblock-macos-x64
+                  asset_name: cast-sponsorblock-macos-x64
+                  asset_content_type: application/octet-stream
+            - name: Upload Windows x64
+              id: upload_win_x64
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/cast-sponsorblock-win-x64.exe
+                  asset_name: cast-sponsorblock-win-x64.exe
+                  asset_content_type: application/x-ms-dos-executable
