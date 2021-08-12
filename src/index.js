@@ -1,10 +1,11 @@
 'use strict';
 
 require('./init');
-const config = require('./config');
 
+const config = require('./config')();
 const Engine = require('./engine');
 const engine = new Engine();
+
 try {
 	engine.start();
 } catch (err) {

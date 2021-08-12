@@ -26,7 +26,8 @@ const cli = meow(
 			},
 			debug: {
 				type: 'boolean',
-				alias: 'd'
+				alias: 'd',
+				default: true
 			}
 		}
 	}
